@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroAssist AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans Tamil', Arial, sans-serif;
+            background: linear-gradient(135deg, #0a1929 0%, #1e3a8a 100%);
+            color: white;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #4ade80, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .chat-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .sidebar {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-container {
+            flex: 1;
+            position: relative;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            font-family: 'Noto Sans Tamil', Arial, sans-serif;
+        }
+
+        .input-field:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #4ade80;
+        }
+
+        .btn {
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #4ade80, #06b6d4);
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 222, 128, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #8b5cf6, #06b6d4);
+        }
+
+        .chat-history {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .message.user {
+            background: linear-gradient(45deg, #3b82f6, #06b6d4);
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .message.ai {
+            background: linear-gradient(45deg, #10b981, #059669);
+            margin-right: auto;
+        }
+
+        .language-selector {
+            margin-bottom: 1.5rem;
+        }
+
+        .language-selector select {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-family: 'Noto Sans Tamil', Arial, sans-serif;
+        }
+
+        .example-questions {
+            margin-bottom: 2rem;
+        }
+
+        .example-btn {
+            width: 100%;
+            margin-bottom: 0.5rem;
+            padding: 0.8rem;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Noto Sans Tamil', Arial, sans-serif;
+        }
+
+        .example-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: linear-gradient(45deg, #4ade80, #06b6d4);
+        }
+
+        .tab-content {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .image-upload-area {
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .image-upload-area:hover {
+            border-color: #4ade80;
+            background: rgba(74, 222, 128, 0.1);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #4ade80;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .tamil-text {
+            font-family: 'Noto Sans Tamil', Arial, sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #4ade80;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .input-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-leaf"></i> Smart Advisory Bot</h1>
+            <p>Intelligent agriculture assistant powered by AgroBot <p>
+        </div>
+
+        <div class="main-content">
+            <div class="chat-section">
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab('chat')">
+                        <i class="fas fa-comments"></i> Chat with AI
+                    </button>
+                    <button class="tab" onclick="switchTab('image')">
+                        <i class="fas fa-image"></i> Image Analysis
+                    </button>
+                    <button class="tab" onclick="switchTab('diagnosis')">
+                        <i class="fas fa-microscope"></i> Disease Diagnosis
+                    </button>
+                </div>
+
+                <!-- Chat Tab -->
+                <div id="chat-tab" class="tab-content active">
+                    <div class="input-group">
+                        <div class="input-container">
+                            <input type="text" id="questionInput" class="input-field" 
+                                   placeholder="Ask an agricultural question..." 
+                                   onkeypress="handleKeyPress(event)">
+                        </div>
+                        <button class="btn" onclick="askQuestion()">
+                            <i class="fas fa-search"></i> Get Answer
+                        </button>
+                        <button class="btn btn-secondary" onclick="startVoiceInput()">
+                            <i class="fas fa-microphone"></i> Voice
+                        </button>
+                    </div>
+
+                    <div class="chat-history" id="chatHistory">
+                        <!-- Chat messages will appear here -->
+                    </div>
+
+                    <div class="loading" id="loading">
+                        <div class="spinner"></div>
+                        <p>Generating response...</p>
+                    </div>
+                </div>
+
+                <!-- Image Analysis Tab -->
+                <div id="image-tab" class="tab-content">
+                    <div class="image-upload-area" onclick="document.getElementById('imageInput').click()">
+                        <i class="fas fa-cloud-upload-alt fa-3x"></i>
+                        <p>Click here to upload an image of a plant or crop</p>
+                        <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+                    </div>
+                    
+                    <div id="imagePreview" style="display: none;">
+                        <img id="uploadedImage" style="max-width: 100%; border-radius: 10px; margin-bottom: 1rem;">
+                    </div>
+
+                    <textarea id="imageDescription" class="input-field" 
+                              placeholder="Describe what you see in the image or ask specific questions..."
+                              rows="3" style="margin-bottom: 1rem; resize: vertical;"></textarea>
+
+                    <button class="btn" onclick="analyzeImage()">
+                        <i class="fas fa-search"></i> Analyze Image
+                    </button>
+
+                    <div id="imageAnalysisResult" style="margin-top: 1rem;"></div>
+                </div>
+
+                <!-- Disease Diagnosis Tab -->
+                <div id="diagnosis-tab" class="tab-content">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-microscope"></i> Disease Diagnosis Features</h4>
+                        <ul>
+                            <li>AI-powered analysis</li>
+                            <li>Treatment recommendations</li>
+                            <li>Prevention advice</li>
+                            <li>Expert guidance</li>
+                        </ul>
+                    </div>
+
+                    <textarea id="symptomDescription" class="input-field" 
+                              placeholder="Describe the symptoms you observe (e.g., brown spots on leaves, wilting, yellowing, etc.)..."
+                              rows="4" style="margin-bottom: 1rem; resize: vertical;"></textarea>
+
+                    <button class="btn" onclick="diagnoseDisease()">
+                        <i class="fas fa-stethoscope"></i> Diagnose Disease
+                    </button>
+
+                    <div id="diagnosisResult" style="margin-top: 1rem;"></div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="language-selector">
+                    <h3><i class="fas fa-globe"></i> Language Settings</h3>
+                    <select id="languageSelect" onchange="changeLanguage()">
+                        {% for code, name in languages.items() %}
+                        <option value="{{ code }}" {% if code == current_language %}selected{% endif %}>
+                            {{ name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="example-questions">
+                    <h3><i class="fas fa-lightbulb"></i> Example Questions</h3>
+                    <div id="exampleQuestions">
+                        <!-- Example questions will be loaded here -->
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <h4><i class="fas fa-info-circle"></i> About</h4>
+                    <p>This chatbot answers questions based on agricultural knowledge. Please double-check the answers.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4><i class="fas fa-microphone"></i> Voice Assistant</h4>
+                    <label>
+                        <input type="checkbox" id="ttsEnabled"> Enable Voice Responses
+                    </label>
+                </div>
+
+                <button class="btn" onclick="clearHistory()" style="width: 100%; margin-top: 1rem;">
+                    <i class="fas fa-trash"></i> Clear Chat History
+                </button>
+
+                <button class="btn btn-secondary" onclick="testAPI()" style="width: 100%; margin-top: 0.5rem;">
+                    <i class="fas fa-plug"></i> Test API Connection
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 2rem; padding: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+        <p>Powered by AgroAssist AI with AgroBot| Multi-language Support | © 2025 AgroBot</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

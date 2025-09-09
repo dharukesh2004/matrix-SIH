@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroAssist AI - Revolutionizing Agricultural Intelligence</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #2ecc71;
+            --secondary-green: #27ae60;
+            --dark-green: #1e8449;
+            --light-background: #f4f6f7;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--light-background);
+            overflow-x: hidden;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, 
+                rgba(46, 204, 113, 0.9), 
+                rgba(39, 174, 96, 0.8)
+            ), url('https://images.unsplash.com/photo-1461354464878-ad92f492a5a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-top: -50px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            background-color: var(--primary-green);
+            border: none;
+            padding: 15px 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--dark-green);
+            transform: scale(1.05);
+        }
+
+        .technology-section {
+            background-color: white;
+            padding: 80px 0;
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-green);
+            margin-bottom: 15px;
+        }
+
+        .testimonial-section {
+            background-color: var(--light-background);
+            padding: 80px 0;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .footer {
+            background-color: var(--dark-green);
+            color: white;
+            padding: 40px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-leaf me-2"></i>AgroAssist AI
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#technology">Technology</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-success text-white" href="#" style="border-radius: 20px;">
+                            Launch App
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center">
+        <div class="container hero-content">
+            <h1 class="display-3 mb-4">Transforming Agriculture with AI</h1>
+            <p class="lead mb-5">Intelligent solutions for modern farmers - Maximize yield, minimize risk</p>
+            <a href="http://localhost:8501" class="btn btn-light btn-lg cta-button">
+                Get Started <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>      
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="feature-card text-center">
+                    <i class="fas fa-robot feature-icon"></i>
+                    <h3>AI Chat Assistant</h3>
+                    <p>Get instant agricultural advice and solutions tailored to your specific needs.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-card text-center">
+                    <i class="fas fa-search-plus feature-icon"></i>
+                    <h3>Disease Detection</h3>
+                    <p>Advanced image recognition to quickly identify and diagnose plant diseases.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-card text-center">
+                    <i class="fas fa-chart-line feature-icon"></i>
+                    <h3>Crop Planning</h3>
+                    <p>Personalized recommendations based on soil, climate, and water availability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="technology" class="technology-section text-center">
+        <div class="container">
+            <h2 class="mb-5">Our Advanced Technologies</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <i class="fas fa-brain tech-icon"></i>
+                    <h4>Machine Learning</h4>
+                    <p>Continuously improving recommendations through advanced algorithms.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <i class="fas fa-satellite tech-icon"></i>
+                    <h4>Satellite Imaging</h4>
+                    <p>Utilize global satellite data for precise agricultural insights.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <i class="fas fa-cloud tech-icon"></i>
+                    <h4>Cloud Processing</h4>
+                    <p>Powerful cloud infrastructure for instant, scalable solutions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonial-section text-center">
+        <div class="container">
+            <h2 class="mb-5">What Farmers Are Saying</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <p>"AgroAssist AI has been a game-changer for my farm's productivity!"</p>
+                        <h5 class="mt-3">- John Smith, Wheat Farmer</h5>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <p>"The disease detection feature saved my entire crop season."</p>
+                        <h5 class="mt-3">- Maria Rodriguez, Organic Farmer</h5>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <p>"Incredible AI-powered insights that actually work in real-world farming."</p>
+                        <h5 class="mt-3">- Ahmed Khan, Agricultural Consultant</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer text-center">
+        <div class="container">
+            <p>&copy; 2025 AgroAssist AI | All Rights Reserved by Agrrobot.</p>
+            <div class="social-icons mt-3">
+                <a href="#" class="text-white mx-2"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
